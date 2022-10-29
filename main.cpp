@@ -29,6 +29,7 @@ void fileHashTable(){
 
 
 int main(){
+    cout << "Hash Table" << endl;
     // HashTable<Person> h1(10, POLYNOMIAL_ROLLING);
     // string names[10] = {"John", "Paul", "George", "Ringo", "Pete", "Alexis", "Dennis", "Stuart", "Roger", "Mick"};
     // int ages[10] = {78, 12, 34, 6, 45, 23, 56, 47, 89, 90};
