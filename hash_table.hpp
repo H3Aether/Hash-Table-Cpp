@@ -16,7 +16,7 @@ class HashTable{
         ~HashTable() {delete[] table;};
 
         void insert(const T& element);
-        T find(const T& element) const;
+        void find(T* element) const;
         void remove(const T& element);
         void display() const;
 
@@ -39,14 +39,15 @@ void HashTable<T>::insert(const T& element){
 }
 
 template <class T>
-T HashTable<T>::find(const T& element) const{
-    int index = hash_function.hash(element.getKey());
-    for (auto it = table[index].begin(); it != table[index].end(); it++){
-        if (it->getKey() == element.getKey()){
-            return *it;
+void HashTable<T>::find(T* element) const{
+    int index = hash_function.hash(element->getKey());
+    for(auto it = table[index].begin(); it != table[index].end(); it++){
+        if(it->getKey() == element->getKey()){
+            *element = *it;
+            return;
         }
     }
-    return T();
+    *element = T();
 }
 
 template <class T>
