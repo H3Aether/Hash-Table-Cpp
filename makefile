@@ -2,9 +2,9 @@ CC = g++
 CFLAGS = -Wall
 
 SOURCES = main.cpp\
-	hash_function.cpp\
-	hash_table.cpp\
-	hash_table_element.cpp\
+	./src/hash_function.cpp\
+	./src/hash_table.cpp\
+	./src/hash_table_element.cpp\
 
 OBJECTS = $(SOURCES: .cpp = .o)
 EXECUTABLE = main
