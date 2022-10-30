@@ -6,15 +6,18 @@ using namespace std;
 /*-------------------------   HASH FUNCTION CLASS   -------------------------*/
 /*---------------------------------------------------------------------------*/
 
-enum HashFunctionType {POLYNOMIAL_ROLLING, DJB2};
+enum HashFunctionType {POLYNOMIAL_ROLLING, DJB2, LAZY_INTEGER};
 
 class HashFunction{
     public:
         HashFunction(unsigned long int n, HashFunctionType hash_type) : table_size(n), type(hash_type) {};
         unsigned long int hash(const string& key) const;
+        unsigned long int hash(const int& key) const;
 
         unsigned long int polynomialRolling(const string& key) const;
         unsigned long int djb2(const string& key) const;
+
+        unsigned long int lazyInteger(const int& key) const;
 
     private:
         unsigned long int table_size;

@@ -25,19 +25,16 @@ def JSONtoCSV(data, csv_filename):
         fields_number = len(data["fields"])
         for body in data["data"]:
             for i in range(fields_number):
-                if i == 1: # full_name always starts with 5 spaces. Remove them
-                    file.write(str(body[i][5:]))
+                if body[i] is None:
+                    file.write("0")
                 else:
-                    if body[i] is None:
-                        file.write("0")
-                    else:
-                        file.write(str(body[i]))
+                    file.write(str(body[i]))
                 if i != fields_number - 1:
                     file.write(",")
             file.write("\n")
 
 def main():
-    csv_filename = "./NASA_JPL_SBDB/data.csv"
+    csv_filename = "./src/NASA_JPL_SBDB/data.csv"
     data = createJSON()
     number_of_bodies = len(data["data"])
     JSONtoCSV(data, csv_filename)

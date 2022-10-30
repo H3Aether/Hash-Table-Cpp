@@ -11,6 +11,16 @@ unsigned long int HashFunction::hash(const string& key) const{
     }
 }
 
+unsigned long int HashFunction::hash(const int& key) const{
+    switch (type)
+    {
+    case LAZY_INTEGER:
+        return lazyInteger(key); break;   
+    default:
+        return 0; break;
+    }
+}
+
 
 
 unsigned long int HashFunction::polynomialRolling(const string& key) const{
@@ -31,4 +41,8 @@ unsigned long int HashFunction::djb2(const string& key) const{
         hash = ((hash << 5) + hash) + c;
     }
     return hash % table_size;
+}
+
+unsigned long int HashFunction::lazyInteger(const int& key) const{
+    return key % table_size;
 }

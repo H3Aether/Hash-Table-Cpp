@@ -1,7 +1,6 @@
 #include "./src/hash_table.hpp"
 #include "./src/NASA_JPL_SBDB/NASA_JPL_SBDB.hpp"
-#include <iostream>
-#include <fstream>
+#include <typeinfo>
 using namespace std;
 
 typedef HashTableElement<string, string> User;
@@ -30,28 +29,34 @@ ostream& operator<<(ostream& os, const User& u){
 
 
 int main(){
-    // HashTable<User> users = createUsersHashTable();
-
-    // bool running = true;
-    // while(running){
-    //     cout << "Enter username: ";
-    //     string username;
-    //     cin >> username;
-    //     if(username == "exit"){
-    //         running = false;
-    //         continue;
-    //     }
-    //     User user_search = User(username);
-    //     users.find(&user_search);
-    //     if (user_search.getKey() == ""){
-    //         cout << "User not found" << endl;
-    //     } else {
-    //         cout << user_search << endl;
-    //     }
-    // }
-
+    
+    cout << "Loading SBDB..." << endl;
     vector<SmallBody> small_bodies = readSmallBodiesDataBase();
-    cout << small_bodies[123456] << endl;
+
+    cout << "SBDB loaded." << endl << "Creating hash table..." << endl;
+    HashTable<SmallBody> sbdb_table(1627601, LAZY_INTEGER);
+    for(SmallBody sb : small_bodies){
+        sbdb_table.insert(sb);
+    }
+    cout << "Hash table created." << endl;
+
+    bool running = true;
+    while(running){
+        cout << "Enter SPK-ID: ";
+        string spkid;
+        cin >> spkid;
+        if(spkid == "exit"){
+            running = false;
+            continue;
+        }
+        SmallBody sb_search = SmallBody(stoi(spkid));
+        sbdb_table.find(&sb_search);
+        if (sb_search.getKey() == 0){
+            cout << "Body not found" << endl;
+        } else {
+            cout << endl << sb_search << endl;
+        }
+    }
 
     return 1;
 }

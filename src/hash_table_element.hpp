@@ -12,7 +12,7 @@ class HashTableElement{
         K getKey() const {return key;};
         V getValue() const {return value;};
 
-    private:
+    protected:
         K key;
         V value;
 };
