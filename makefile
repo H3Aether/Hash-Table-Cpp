@@ -5,6 +5,7 @@ SOURCES = main.cpp\
 	./src/hash_function.cpp\
 	./src/hash_table.cpp\
 	./src/hash_table_element.cpp\
+	./src/NASA_JPL_SBDB/NASA_JPL_SBDB.cpp\
 
 OBJECTS = $(SOURCES: .cpp = .o)
 EXECUTABLE = main

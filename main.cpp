@@ -1,4 +1,5 @@
 #include "./src/hash_table.hpp"
+#include "./src/NASA_JPL_SBDB/NASA_JPL_SBDB.hpp"
 #include <iostream>
 #include <fstream>
 using namespace std;
@@ -29,25 +30,28 @@ ostream& operator<<(ostream& os, const User& u){
 
 
 int main(){
-    HashTable<User> users = createUsersHashTable();
+    // HashTable<User> users = createUsersHashTable();
 
-    bool running = true;
-    while(running){
-        cout << "Enter username: ";
-        string username;
-        cin >> username;
-        if(username == "exit"){
-            running = false;
-            continue;
-        }
-        User user_search = User(username);
-        users.find(&user_search);
-        if (user_search.getKey() == ""){
-            cout << "User not found" << endl;
-        } else {
-            cout << user_search << endl;
-        }
-    }
+    // bool running = true;
+    // while(running){
+    //     cout << "Enter username: ";
+    //     string username;
+    //     cin >> username;
+    //     if(username == "exit"){
+    //         running = false;
+    //         continue;
+    //     }
+    //     User user_search = User(username);
+    //     users.find(&user_search);
+    //     if (user_search.getKey() == ""){
+    //         cout << "User not found" << endl;
+    //     } else {
+    //         cout << user_search << endl;
+    //     }
+    // }
+
+    vector<SmallBody> small_bodies = readSmallBodiesDataBase();
+    cout << small_bodies[123456] << endl;
 
     return 1;
 }
