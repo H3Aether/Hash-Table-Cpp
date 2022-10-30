@@ -6,7 +6,7 @@ using namespace std;
 /*-------------------------   HASH FUNCTION CLASS   -------------------------*/
 /*---------------------------------------------------------------------------*/
 
-enum HashFunctionType {POLYNOMIAL_ROLLING, DJB2, LAZY_INTEGER};
+enum HashFunctionType {POLYNOMIAL_ROLLING, DJB2, DIVISION, INTEGER_32};
 
 class HashFunction{
     public:
@@ -17,7 +17,8 @@ class HashFunction{
         unsigned long int polynomialRolling(const string& key) const;
         unsigned long int djb2(const string& key) const;
 
-        unsigned long int lazyInteger(const int& key) const;
+        unsigned long int division(const int& key) const;
+        unsigned long int integer32(const int& key) const;
 
     private:
         unsigned long int table_size;

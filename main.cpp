@@ -34,11 +34,15 @@ int main(){
     vector<SmallBody> small_bodies = readSmallBodiesDataBase();
 
     cout << "SBDB loaded." << endl << "Creating hash table..." << endl;
-    HashTable<SmallBody> sbdb_table(1627601, LAZY_INTEGER);
+    HashTable<SmallBody> sbdb_table(1627601, INTEGER_32);
     for(SmallBody sb : small_bodies){
         sbdb_table.insert(sb);
     }
+    small_bodies.clear(); // Free memory
     cout << "Hash table created." << endl;
+
+    sbdb_table.printStatistics();
+    cout << endl;
 
     bool running = true;
     while(running){

@@ -1,5 +1,5 @@
 CC = g++
-CFLAGS = -Wall
+CFLAGS = -Wall -O3
 
 SOURCES = main.cpp\
 	./src/hash_function.cpp\

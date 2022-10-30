@@ -14,8 +14,10 @@ unsigned long int HashFunction::hash(const string& key) const{
 unsigned long int HashFunction::hash(const int& key) const{
     switch (type)
     {
-    case LAZY_INTEGER:
-        return lazyInteger(key); break;   
+    case DIVISION:
+        return division(key); break;
+    case INTEGER_32:
+        return integer32(key); break;
     default:
         return 0; break;
     }
@@ -43,6 +45,16 @@ unsigned long int HashFunction::djb2(const string& key) const{
     return hash % table_size;
 }
 
-unsigned long int HashFunction::lazyInteger(const int& key) const{
+unsigned long int HashFunction::division(const int& key) const{
     return key % table_size;
+}
+
+unsigned long int HashFunction::integer32(const int& key) const{
+    unsigned long int hash = key;
+    hash = (hash ^ 61) ^ (hash >> 16);
+    hash = hash + (hash << 3);
+    hash = hash ^ (hash >> 4);
+    hash = hash * 0x27d4eb2d;
+    hash = hash ^ (hash >> 15);
+    return hash % table_size;
 }

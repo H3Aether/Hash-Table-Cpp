@@ -3,6 +3,7 @@
 #include "hash_function.hpp"
 #include <list>
 #include <iostream>
+#include <iomanip>
 using namespace std;
 
 /*---------------------------------HashTable---------------------------------*/
@@ -18,24 +19,40 @@ class HashTable{
         void insert(const T& element);
         void find(T* element) const;
         void remove(const T& element);
-        void display() const;
+        void printStatistics() const;
+
 
     private:
         list<T>* table;
         size_t size;
         HashFunction hash_function;
+        unsigned long int entries;
+        unsigned long int empty_cells;
+        unsigned long int collisions;
 };
 
 template<class T>
 HashTable<T>::HashTable(unsigned long int n, HashFunctionType hash_type) : hash_function(n, hash_type){
     size = n;
     table = new list<T>[size];
+    entries = 0;
+    empty_cells = size;
+    collisions = 0;
 }
 
 template <class T>
 void HashTable<T>::insert(const T& element){
-    int index = hash_function.hash(element.getKey());
-    table[index].push_back(element);
+    int index = hash_function.hash(element.getKey()); 
+
+    // Updating data
+    entries++;
+    if (table[index].empty()){
+        empty_cells--;
+    } else {
+        collisions++;
+    }
+
+    table[index].push_back(element); // Inserting element
 }
 
 template <class T>
@@ -61,16 +78,12 @@ void HashTable<T>::remove(const T& element){
     }
 }
 
-
-
-
 template <class T>
-void HashTable<T>::display() const{
-    for(int i=0; i<size; i++){
-        cout << "Index " << i << ": | ";
-        for(auto it = table[i].begin(); it != table[i].end(); it++){
-            cout << it->getKey() << " " << it->getValue() << " | ";
-        }
-        cout << endl;
-    }
+void HashTable<T>::printStatistics() const{
+    cout << "HASH TABLE STATISTICS:" << endl;
+    cout << "|   Table size......................" << size << endl;
+    cout << "|   Number of entries..............." << entries << " (" << fixed << setprecision(0) << (float)entries/size*100 << "% of table size)" << endl;
+    cout << "|   Number of empty cells..........." << empty_cells << " (" << (float)empty_cells/size*100 << "% of table size)" << endl;
+    cout << "|   Number of collisions............" << collisions << endl;
+    cout << "|   Avg nb of elements per cell....." << setprecision(2) << (float)entries/(size-empty_cells) << endl;
 }
