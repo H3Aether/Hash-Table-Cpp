@@ -4,7 +4,7 @@ Hash tables are a data structure that allows for fast lookup of data. I want to 
 
 ## An example using NASA/JPL's Small-Body Database
 
-The SBDB regroups over 1,250,000 objects in the Solar System. The data was retrieved using the Query API (https://ssd-api.jpl.nasa.gov/doc/sbdb_query.html), and processed to a CSV file using Python (see [this script](./src/NASA_JPL_SBDB/fetch_data.py)).
+The SBDB regroups over 1,250,000 objects in the Solar System. The data was retrieved using the [Query API](https://ssd-api.jpl.nasa.gov/doc/sbdb_query.html), and processed to a CSV file using Python (see [this script](./src/NASA_JPL_SBDB/fetch_data.py)).
 The elements are inserted into a hash table, using their SPK-ID as the key. The SPK-ID is a unique identifier for each object in the SBDB. The hash table is then used to retrieve the data for a given object.
 
 ## How to use
